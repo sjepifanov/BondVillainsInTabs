@@ -47,7 +47,7 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     
     let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.Default) {action in self.dismissViewControllerAnimated(true, completion: nil)}
     nextController.addAction(cancelAction)
-    let okAction = UIAlertAction(title: okTitle, style: UIAlertActionStyle.Default) {action in self.deleteSelection}
+    let okAction = UIAlertAction(title: okTitle, style: UIAlertActionStyle.Default) {action in self.deleteSelection()}
     nextController.addAction(okAction)
     self.presentViewController(nextController, animated: true, completion: nil)
   }
@@ -70,7 +70,7 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        println("in numberofrows")
+
         let cell = tableView.dequeueReusableCellWithIdentifier("VillainCell") as! UITableViewCell
         let villain = self.allVillains[indexPath.row]
         
@@ -104,6 +104,9 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         self.updateDeleteButtonTitle()
     }
+  
+  //MARK: Methods for Add, Edit, Delete and Cancel actions
+  
   func deleteSelection (){
       // Delete what the user selected.
       // Build an NSIndexSet of all the objects to delete, so they can all be removed at once.
@@ -129,12 +132,12 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
   }
   
   func updateButtonsToMatchTableState(){
+    println("in upd btnTomtch")
     if self.tableView.editing{
+      println("set cncl and del btn")
       self.navigationItem.rightBarButtonItem = self.cancelButton
-      
       self.updateDeleteButtonTitle()
       self.navigationItem.leftBarButtonItem = self.deleteButton
-      
     }else{
       self.navigationItem.leftBarButtonItem = self.addButton
       
@@ -148,19 +151,23 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
   }
   
   func updateDeleteButtonTitle(){
-    let selectedRows = [self.tableView.indexPathsForSelectedRows]
-    println("upd del btn. row selected \(selectedRows.count)")
-    let allItemsAreSelected = selectedRows.count == self.allVillains.count ? true : false
-    let noItemsAreSelected = selectedRows.count == 0 ? true : false
+    println("in updDelBtnTit")
     
-    if allItemsAreSelected || noItemsAreSelected {
-      self.deleteButton.title = "Delete All"
-    }else{
-      self.deleteButton.title = "Delete \(selectedRows.count)"
+    if let selectedRows = tableView.indexPathsForSelectedRows() as? [NSIndexPath]{
+      println("upd del btn. row selected \(selectedRows.count)")
+      let allItemsAreSelected = selectedRows.count == self.allVillains.count ? true : false
+      println("all items selected \(allItemsAreSelected)")
+      let noItemsAreSelected = selectedRows.count == 0 ? true : false
+      println("no items selected \(noItemsAreSelected)")
+      
+      if allItemsAreSelected || noItemsAreSelected {
+        println("Delete All")
+        self.deleteButton.title = "Delete All"
+      }else{
+        self.deleteButton.title = "Delete (\(selectedRows.count))"
+      }
     }
   }
-  
-
-  
+//end of class
 }
 
