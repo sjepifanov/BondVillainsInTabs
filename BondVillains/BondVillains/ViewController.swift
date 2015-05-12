@@ -102,10 +102,7 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         self.updateDeleteButtonTitle()
     }
-  func actionSheet (clickedButtonAtIndex buttonIndex: NSInteger){
-    // The user tapped one of the OK/Cancel buttons.
-    if buttonIndex == 0
-    {
+  func deleteSelection (){
       // Delete what the user selected.
       // Build an NSIndexSet of all the objects to delete, so they can all be removed at once.
       if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath]{
@@ -127,7 +124,6 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
       // Exit editing mode after the deletion.
       self.tableView.setEditing(false, animated: true)
       self.updateButtonsToMatchTableState()
-    }
   }
   
   func updateButtonsToMatchTableState(){
@@ -135,6 +131,7 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
       self.navigationItem.rightBarButtonItem = self.cancelButton
       
       self.updateDeleteButtonTitle()
+      self.navigationItem.leftBarButtonItem = self.deleteButton
       
     }else{
       self.navigationItem.leftBarButtonItem = self.addButton
@@ -150,6 +147,7 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
   
   func updateDeleteButtonTitle(){
     let selectedRows = [self.tableView.indexPathsForSelectedRows]
+    println("upd del btn. row selected \(selectedRows.count)")
     let allItemsAreSelected = selectedRows.count == self.allVillains.count ? true : false
     let noItemsAreSelected = selectedRows.count == 0 ? true : false
     
