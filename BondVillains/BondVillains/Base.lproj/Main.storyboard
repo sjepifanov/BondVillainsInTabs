@@ -111,7 +111,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="kqd-me-UMl"/>
                     <connections>
-                        <outlet property="addButton" destination="6PG-sD-bNR" id="H8R-kt-hMn"/>
+                        <outlet property="addButton" destination="6PG-sD-bNR" id="vEO-Wf-jOf"/>
                         <outlet property="cancelButton" destination="HlR-4d-t1R" id="dXX-gf-V37"/>
                         <outlet property="deleteButton" destination="MlQ-oQ-Mhx" id="ogB-wJ-emM"/>
                         <outlet property="editButton" destination="7vi-ik-cy6" id="XML-sU-7A0"/>
@@ -120,7 +120,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jy2-fl-SYY" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Add" id="6PG-sD-bNR">
                     <connections>
-                        <action selector="addAction:" destination="HkB-eO-nVE" id="aiW-iu-IkA"/>
+                        <action selector="addAction:" destination="HkB-eO-nVE" id="kRE-BG-axz"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Delete" id="MlQ-oQ-Mhx">

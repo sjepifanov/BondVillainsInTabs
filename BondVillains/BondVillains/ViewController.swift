@@ -33,22 +33,27 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
   
   @IBAction func deleteAction(sender: AnyObject) {
     
-    let actionTitle: String
-    let alertTitle = "Remove villain"
     
-    if [self.tableView.indexPathsForSelectedRows].count == 1 {
-      actionTitle = "Are you sure you want to remove this item?"
-    }else{
-      actionTitle = "Are you sure you want to remove these items?"
-    }
+    var alertTitle = "Remove villains"
+    var actionTitle = "Are you sure you want to remove these items?"
     let cancelTitle = "Cancel"
     let okTitle = "OK"
+    
+    if let selectedRows = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+      if selectedRows.count == 1 {
+      alertTitle = "Remove villain"
+      actionTitle = "Are you sure you want to remove this item?"
+      }
+    }
+    
     let nextController = UIAlertController(title: alertTitle, message: actionTitle, preferredStyle: UIAlertControllerStyle.Alert)
     
     let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.Default) {action in self.dismissViewControllerAnimated(true, completion: nil)}
     nextController.addAction(cancelAction)
+    
     let okAction = UIAlertAction(title: okTitle, style: UIAlertActionStyle.Default) {action in self.deleteSelection()}
     nextController.addAction(okAction)
+    
     self.presentViewController(nextController, animated: true, completion: nil)
   }
 
@@ -111,20 +116,20 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
       // Delete what the user selected.
       // Build an NSIndexSet of all the objects to delete, so they can all be removed at once.
       if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath]{
+        
         for indexPath in indexPaths{
           //remove from table view data source
-          allVillains.removeAtIndex(indexPath.row)
-        
-          //remove rows from table view
-          tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+          self.allVillains.removeAtIndex(indexPath.row)
         }
+          //remove rows from table view
+        tableView.deleteRowsAtIndexPaths([indexPaths], withRowAnimation: .Automatic)
+        
       }else{
         // Delete everything, delete the objects from our data model.
         self.allVillains.removeAll(keepCapacity: false)
         // Tell the tableView that we deleted the objects.
         // Because we are deleting all the rows, just reload the current table section
         self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-        
       }
       // Exit editing mode after the deletion.
       self.tableView.setEditing(false, animated: true)
@@ -132,42 +137,34 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
   }
   
   func updateButtonsToMatchTableState(){
-    println("in upd btnTomtch")
     if self.tableView.editing{
-      println("set cncl and del btn")
       self.navigationItem.rightBarButtonItem = self.cancelButton
       self.updateDeleteButtonTitle()
       self.navigationItem.leftBarButtonItem = self.deleteButton
     }else{
       self.navigationItem.leftBarButtonItem = self.addButton
       
-      if self.allVillains.count > 0{
-        self.editButton.enabled = true
-      }else{
+      if self.allVillains.isEmpty {
         self.editButton.enabled = false
+      }else{
+        self.editButton.enabled = true
       }
+      
       self.navigationItem.rightBarButtonItem = self.editButton
     }
   }
   
+  
   func updateDeleteButtonTitle(){
-    println("in updDelBtnTit")
-    
     if let selectedRows = tableView.indexPathsForSelectedRows() as? [NSIndexPath]{
-      println("upd del btn. row selected \(selectedRows.count)")
       let allItemsAreSelected = selectedRows.count == self.allVillains.count ? true : false
-      println("all items selected \(allItemsAreSelected)")
-      let noItemsAreSelected = selectedRows.count == 0 ? true : false
-      println("no items selected \(noItemsAreSelected)")
-      
-      if allItemsAreSelected || noItemsAreSelected {
-        println("Delete All")
-        self.deleteButton.title = "Delete All"
-      }else{
-        self.deleteButton.title = "Delete (\(selectedRows.count))"
-      }
+      self.deleteButton.title = "Delete (\(selectedRows.count))"
+      if allItemsAreSelected {self.deleteButton.title = "Delete All"}
+    }else{
+      self.deleteButton.title = "Delete All"
     }
   }
+  
 //end of class
 }
 
