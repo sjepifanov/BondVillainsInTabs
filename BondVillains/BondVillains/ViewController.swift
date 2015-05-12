@@ -48,6 +48,7 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.Default) {action in self.dismissViewControllerAnimated(true, completion: nil)}
     nextController.addAction(cancelAction)
     let okAction = UIAlertAction(title: okTitle, style: UIAlertActionStyle.Default) {action in self.deleteSelection}
+    nextController.addAction(okAction)
     self.presentViewController(nextController, animated: true, completion: nil)
   }
 
