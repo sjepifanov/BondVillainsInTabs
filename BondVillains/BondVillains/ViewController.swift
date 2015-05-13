@@ -9,10 +9,13 @@
 import UIKit
 
 class ViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
-    
+  
+//TODO: think of replacing all necessary indexPaths with selectedRows for clarity.
+  
     // Get ahold of some villains, for the table
     // This is an array of Villain instances
     var allVillains = Villain.allVillains
+    let genericVillain = [Villain.NameKey : "Generic Villain", Villain.EvilSchemeKey : "Generic Evil Scheme.",  Villain.ImageNameKey : "Generic"]
   
   @IBOutlet var addButton: UIBarButtonItem!
   @IBOutlet var deleteButton: UIBarButtonItem!
@@ -21,40 +24,56 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
+    // make our view consistent
     self.updateButtonsToMatchTableState()
   }
   
     //MARK: Table View Actions
   
   @IBAction func addAction(sender: AnyObject) {
-    //TODO: write implementation
+    // Tell the tableView we're going to add (or remove) items.
+    self.tableView.beginUpdates()
+    // Add an item to the array.
+    allVillains.append(Villain(dictionary: genericVillain))
+    
+    // Tell the tableView about the item that was added.
+    let indexPathForNewItem = NSIndexPath(forItem: allVillains.count - 1, inSection: 0)
+    tableView.insertRowsAtIndexPaths([indexPathForNewItem], withRowAnimation: .Automatic)
+    
+    // Tell the tableView we have finished adding or removing items.
+    self.tableView.endUpdates()
+    
+    // Scroll the tableView so the new item is visible
+    self.tableView.scrollToRowAtIndexPath(indexPathForNewItem, atScrollPosition: .Bottom, animated: true)
+    
+    // Update the buttons if we need to.
+    self.updateButtonsToMatchTableState()
   }
   
   @IBAction func deleteAction(sender: AnyObject) {
     
-    
-    var alertTitle = "Remove villains"
-    var actionTitle = "Are you sure you want to remove these items?"
     let cancelTitle = "Cancel"
     let okTitle = "OK"
+    var alertTitle = "Remove villains"
+    var actionTitle = "Are you sure you want to remove these items?"
     
-    if let selectedRows = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
-      if selectedRows.count == 1 {
+    if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+      if indexPaths.count == 1 {
       alertTitle = "Remove villain"
       actionTitle = "Are you sure you want to remove this item?"
       }
     }
     
-    let nextController = UIAlertController(title: alertTitle, message: actionTitle, preferredStyle: UIAlertControllerStyle.Alert)
+    let alertController = UIAlertController(title: alertTitle, message: actionTitle, preferredStyle: UIAlertControllerStyle.Alert)
     
     let cancelAction = UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.Default) {action in self.dismissViewControllerAnimated(true, completion: nil)}
-    nextController.addAction(cancelAction)
+    alertController.addAction(cancelAction)
     
     let okAction = UIAlertAction(title: okTitle, style: UIAlertActionStyle.Default) {action in self.deleteSelection()}
-    nextController.addAction(okAction)
+    alertController.addAction(okAction)
     
-    self.presentViewController(nextController, animated: true, completion: nil)
+    self.presentViewController(alertController, animated: true, completion: nil)
   }
 
   @IBAction func editAction(sender: AnyObject) {
@@ -96,8 +115,9 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-      println("in didSelectRow")
       if self.tableView.editing{
+        
+        // Update the delete button's title based on how many items are selected.
         self.updateButtonsToMatchTableState()
       }else{
       let detailController = self.storyboard!.instantiateViewControllerWithIdentifier("VillainDetailViewController")! as! VillainDetailViewController
@@ -107,64 +127,87 @@ class ViewController: UITableViewController, UITableViewDataSource, UITableViewD
     }
   
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+      
+        // Update the delete button's title based on how many items are selected.
         self.updateDeleteButtonTitle()
     }
   
+  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    if editingStyle == UITableViewCellEditingStyle.Delete{
+      allVillains.removeAtIndex(indexPath.row)
+      tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+    }
+  }
+  
   //MARK: Methods for Add, Edit, Delete and Cancel actions
   
-  func deleteSelection (){
-      // Delete what the user selected.
-      // Build an NSIndexSet of all the objects to delete, so they can all be removed at once.
-      if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath]{
+  func deleteSelection() {
+    
+    // Unwrap indexPaths to check if rows are selected
+    if let _ = tableView.indexPathsForSelectedRows() {
+      
+      // Do while all selected rows are deleted
+      do {
         
-        for indexPath in indexPaths{
-          //remove from table view data source
-          self.allVillains.removeAtIndex(indexPath.row)
+      if let indexPath = tableView.indexPathForSelectedRow(){
+        
+        //remove from table view data source and table view
+        self.allVillains.removeAtIndex(indexPath.row)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
         }
-          //remove rows from table view
-        tableView.deleteRowsAtIndexPaths([indexPaths], withRowAnimation: .Automatic)
-        
-      }else{
-        // Delete everything, delete the objects from our data model.
-        self.allVillains.removeAll(keepCapacity: false)
-        // Tell the tableView that we deleted the objects.
-        // Because we are deleting all the rows, just reload the current table section
-        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-      }
-      // Exit editing mode after the deletion.
-      self.tableView.setEditing(false, animated: true)
-      self.updateButtonsToMatchTableState()
+      
+      } while tableView.indexPathsForSelectedRows() != nil
+    
+    }else{
+      
+      // Delete everything, delete the objects from data model.
+      self.allVillains.removeAll(keepCapacity: false)
+      
+      // Tell the tableView that we deleted the objects.
+      // Because we are deleting all the rows, just reload the current table section
+      self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+    }
+    
+    // Exit editing mode after the deletion.
+    self.tableView.setEditing(false, animated: true)
+    self.updateButtonsToMatchTableState()
   }
+  
+
   
   func updateButtonsToMatchTableState(){
     if self.tableView.editing{
+      
+      // Show the option to cancel the edit.
       self.navigationItem.rightBarButtonItem = self.cancelButton
+
       self.updateDeleteButtonTitle()
+      
+      // Show the delete button.
       self.navigationItem.leftBarButtonItem = self.deleteButton
     }else{
+      
+      // Not in editing mode.
       self.navigationItem.leftBarButtonItem = self.addButton
       
-      if self.allVillains.isEmpty {
-        self.editButton.enabled = false
-      }else{
-        self.editButton.enabled = true
-      }
-      
+      // Show the edit button, but disable the edit button if there's nothing to edit.
+      self.editButton.enabled = self.allVillains.isEmpty ? false : true
       self.navigationItem.rightBarButtonItem = self.editButton
     }
   }
   
-  
   func updateDeleteButtonTitle(){
-    if let selectedRows = tableView.indexPathsForSelectedRows() as? [NSIndexPath]{
-      let allItemsAreSelected = selectedRows.count == self.allVillains.count ? true : false
-      self.deleteButton.title = "Delete (\(selectedRows.count))"
+    
+    // Update the delete button's title, based on how many items are selected
+    if let indexPaths = tableView.indexPathsForSelectedRows() as? [NSIndexPath] {
+      self.deleteButton.title = "Delete (\(indexPaths.count))"
+      
+      let allItemsAreSelected = indexPaths.count == self.allVillains.count ? true : false
       if allItemsAreSelected {self.deleteButton.title = "Delete All"}
     }else{
       self.deleteButton.title = "Delete All"
     }
   }
   
-//end of class
 }
 
