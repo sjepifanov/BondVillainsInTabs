@@ -3,14 +3,27 @@
 //  BondVillains
 //
 //  Created by Jason on 11/19/14.
+//  Modified by Sergei on 30/04/15.
 //  Copyright (c) 2014 Udacity. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
+// Overload == opertor so we could use find() and .filter methods to remove objects from array
 
-struct Villain {
+func == (lhs: Villain, rhs: Villain) -> Bool {
+  if lhs.name == rhs.name &&
+    lhs.evilScheme == rhs.evilScheme &&
+    lhs.imageName == rhs.imageName {
+      return true
+  }
+  return false
+}
+
+// Make Villain struct Equatable for find and .filter to work
+
+struct Villain: Equatable {
     
     let name: String
     let evilScheme: String

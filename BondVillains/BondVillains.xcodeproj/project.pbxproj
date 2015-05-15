@@ -14,6 +14,9 @@
 		4D04CC0C1A1D1E5700FAB0D8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D04CC0A1A1D1E5700FAB0D8 /* LaunchScreen.xib */; };
 		4D04CC181A1D1E5700FAB0D8 /* BondVillainsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04CC171A1D1E5700FAB0D8 /* BondVillainsTests.swift */; };
 		4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D04CC211A1D261800FAB0D8 /* Villain.swift */; };
+		85E744661B038E1E00DECE90 /* VillainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E744651B038E1E00DECE90 /* VillainCollectionViewController.swift */; };
+		85E744681B038E3800DECE90 /* VillainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E744671B038E3800DECE90 /* VillainCollectionViewCell.swift */; };
+		85E7446A1B03B8CC00DECE90 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 85E744691B03B8CC00DECE90 /* Default-568h@2x.png */; };
 		85F338F31AF25B5D00DCAB62 /* VillainDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F338F21AF25B5D00DCAB62 /* VillainDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +42,9 @@
 		4D04CC161A1D1E5700FAB0D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D04CC171A1D1E5700FAB0D8 /* BondVillainsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BondVillainsTests.swift; sourceTree = "<group>"; };
 		4D04CC211A1D261800FAB0D8 /* Villain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Villain.swift; sourceTree = "<group>"; };
+		85E744651B038E1E00DECE90 /* VillainCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VillainCollectionViewController.swift; sourceTree = "<group>"; };
+		85E744671B038E3800DECE90 /* VillainCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VillainCollectionViewCell.swift; sourceTree = "<group>"; };
+		85E744691B03B8CC00DECE90 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		85F338F21AF25B5D00DCAB62 /* VillainDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VillainDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +69,7 @@
 		4D04CBF31A1D1E5700FAB0D8 = {
 			isa = PBXGroup;
 			children = (
+				85E744691B03B8CC00DECE90 /* Default-568h@2x.png */,
 				4D04CBFE1A1D1E5700FAB0D8 /* BondVillains */,
 				4D04CC141A1D1E5700FAB0D8 /* BondVillainsTests */,
 				4D04CBFD1A1D1E5700FAB0D8 /* Products */,
@@ -82,8 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				4D04CC031A1D1E5700FAB0D8 /* ViewController.swift */,
+				85E744651B038E1E00DECE90 /* VillainCollectionViewController.swift */,
 				85F338F21AF25B5D00DCAB62 /* VillainDetailViewController.swift */,
 				4D04CC211A1D261800FAB0D8 /* Villain.swift */,
+				85E744671B038E3800DECE90 /* VillainCollectionViewCell.swift */,
 				4D04CC011A1D1E5700FAB0D8 /* AppDelegate.swift */,
 				4D04CC051A1D1E5700FAB0D8 /* Main.storyboard */,
 				4D04CC081A1D1E5700FAB0D8 /* Images.xcassets */,
@@ -199,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D04CC071A1D1E5700FAB0D8 /* Main.storyboard in Resources */,
+				85E7446A1B03B8CC00DECE90 /* Default-568h@2x.png in Resources */,
 				4D04CC0C1A1D1E5700FAB0D8 /* LaunchScreen.xib in Resources */,
 				4D04CC091A1D1E5700FAB0D8 /* Images.xcassets in Resources */,
 			);
@@ -220,8 +230,10 @@
 			files = (
 				4D04CC041A1D1E5700FAB0D8 /* ViewController.swift in Sources */,
 				4D04CC021A1D1E5700FAB0D8 /* AppDelegate.swift in Sources */,
+				85E744681B038E3800DECE90 /* VillainCollectionViewCell.swift in Sources */,
 				4D04CC221A1D261800FAB0D8 /* Villain.swift in Sources */,
 				85F338F31AF25B5D00DCAB62 /* VillainDetailViewController.swift in Sources */,
+				85E744661B038E1E00DECE90 /* VillainCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

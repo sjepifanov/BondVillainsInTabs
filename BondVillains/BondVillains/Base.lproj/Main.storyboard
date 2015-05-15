@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5K8-1i-FWg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9aq-l4-sD0">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--VillainDetailViewController-->
+        <!--Villain Detail-->
         <scene sceneID="Vy2-Bq-rH5">
             <objects>
-                <viewController storyboardIdentifier="VillainDetailViewController" title="VillainDetailViewController" id="8kg-lD-4dT" customClass="VillainDetailViewController" customModule="BondVillains" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VillainDetailViewController" title="Villain Detail" id="8kg-lD-4dT" customClass="VillainDetailViewController" customModule="BondVillains" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Kq-bJ-vbg"/>
                         <viewControllerLayoutGuide type="bottom" id="tUP-Yi-m2j"/>
@@ -29,11 +30,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OY7-qQ-guZ">
+                                <rect key="frame" x="279" y="368" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="OY7-qQ-guZ" secondAttribute="centerX" id="Kbg-G6-4yH"/>
                             <constraint firstItem="Q96-nc-bo7" firstAttribute="leading" secondItem="mos-8x-wzd" secondAttribute="leading" id="NKT-OE-luA"/>
                             <constraint firstAttribute="centerX" secondItem="Q96-nc-bo7" secondAttribute="centerX" id="Nn4-Z1-3SY"/>
+                            <constraint firstItem="OY7-qQ-guZ" firstAttribute="top" secondItem="mos-8x-wzd" secondAttribute="bottom" constant="41" id="WJK-15-dKY"/>
                             <constraint firstAttribute="centerY" secondItem="Q96-nc-bo7" secondAttribute="centerY" constant="98" id="aX6-G7-w8e"/>
                             <constraint firstAttribute="centerX" secondItem="mos-8x-wzd" secondAttribute="centerX" id="b3a-G3-hVW"/>
                             <constraint firstItem="mos-8x-wzd" firstAttribute="top" secondItem="Q96-nc-bo7" secondAttribute="bottom" constant="54" id="b6t-MT-QIU"/>
@@ -48,17 +57,54 @@
                     <connections>
                         <outlet property="villainImage" destination="Q96-nc-bo7" id="E4L-5N-ztt"/>
                         <outlet property="villainName" destination="mos-8x-wzd" id="81S-iF-omA"/>
+                        <outlet property="villainScheme" destination="OY7-qQ-guZ" id="TWr-nT-Lmz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YlU-R3-hgl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1158" y="575"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="xAZ-9r-euR">
+            <objects>
+                <tabBarController id="9aq-l4-sD0" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="vyQ-X8-Diy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="5K8-1i-FWg" kind="relationship" relationship="viewControllers" id="DGL-Cn-rpS"/>
+                        <segue destination="Uyh-bY-PTS" kind="relationship" relationship="viewControllers" id="qSo-iY-cbb"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ljr-eZ-PZW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1118" y="275"/>
+        </scene>
+        <!--Collection-->
+        <scene sceneID="NPM-1K-JTG">
+            <objects>
+                <navigationController title="Collection" id="Uyh-bY-PTS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Collection" id="Oyz-dd-uig"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6CI-wJ-rv6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Tpk-fk-xT8" kind="relationship" relationship="rootViewController" id="C81-1J-u7S"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7sB-Us-2hJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-346" y="-109"/>
+        </scene>
+        <!--Table-->
         <scene sceneID="XsW-u1-BwK">
             <objects>
-                <navigationController toolbarHidden="NO" id="5K8-1i-FWg" sceneMemberID="viewController">
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                <navigationController title="Table" id="5K8-1i-FWg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table" id="tf9-wA-DLY" userLabel="Table"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RcG-NC-Sdw">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -67,18 +113,116 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="HkB-eO-nVE" kind="relationship" relationship="rootViewController" id="ysP-XC-mxF"/>
+                        <segue destination="HkB-eO-nVE" kind="relationship" relationship="rootViewController" id="vfu-UG-G7r"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bAu-lO-rN6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-346" y="575"/>
         </scene>
-        <!--View Controller-->
+        <!--Villains-->
+        <scene sceneID="aKq-YJ-f54">
+            <objects>
+                <collectionViewController title="Villains" id="Tpk-fk-xT8" customClass="VillainCollectionViewController" customModule="BondVillains" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xfp-9M-rCq">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="htu-BC-GpE">
+                            <size key="itemSize" width="108" height="104"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VillainCollectionViewCell" id="vzA-S5-Wd4" customClass="VillainCollectionViewCell" customModule="BondVillains" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="108" height="104"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtI-G2-fa5">
+                                            <rect key="frame" x="8" y="8" width="92" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdN-LM-g8n">
+                                            <rect key="frame" x="8" y="80" width="92" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6JY-X3-zcp">
+                                            <rect key="frame" x="25" y="32" width="58" height="40"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="6JY-X3-zcp" secondAttribute="centerX" id="2Ic-Ld-uNy"/>
+                                    <constraint firstAttribute="centerX" secondItem="CtI-G2-fa5" secondAttribute="centerX" id="2y7-bX-EHh"/>
+                                    <constraint firstItem="6JY-X3-zcp" firstAttribute="leading" secondItem="vzA-S5-Wd4" secondAttribute="leadingMargin" constant="17" id="3Cj-rO-K0g"/>
+                                    <constraint firstItem="CtI-G2-fa5" firstAttribute="trailing" secondItem="vzA-S5-Wd4" secondAttribute="trailingMargin" id="AzG-Vg-Nd5"/>
+                                    <constraint firstItem="6JY-X3-zcp" firstAttribute="top" secondItem="CtI-G2-fa5" secondAttribute="bottom" constant="8" id="C6b-eg-Trv"/>
+                                    <constraint firstItem="sdN-LM-g8n" firstAttribute="top" secondItem="6JY-X3-zcp" secondAttribute="bottom" constant="8" id="KFD-N4-a91"/>
+                                    <constraint firstItem="CtI-G2-fa5" firstAttribute="leading" secondItem="vzA-S5-Wd4" secondAttribute="leadingMargin" id="NdG-jB-REN"/>
+                                    <constraint firstItem="sdN-LM-g8n" firstAttribute="top" secondItem="CtI-G2-fa5" secondAttribute="bottom" constant="56" id="XHt-0e-xHO"/>
+                                    <constraint firstItem="sdN-LM-g8n" firstAttribute="leading" secondItem="vzA-S5-Wd4" secondAttribute="leadingMargin" id="fOp-Ac-Bw5"/>
+                                    <constraint firstAttribute="centerY" secondItem="6JY-X3-zcp" secondAttribute="centerY" id="fZh-vQ-Jal"/>
+                                    <constraint firstItem="CtI-G2-fa5" firstAttribute="top" secondItem="vzA-S5-Wd4" secondAttribute="topMargin" id="kkf-8h-P2q"/>
+                                    <constraint firstItem="sdN-LM-g8n" firstAttribute="trailing" secondItem="vzA-S5-Wd4" secondAttribute="trailingMargin" id="s1H-eg-k8e"/>
+                                    <constraint firstItem="sdN-LM-g8n" firstAttribute="bottom" secondItem="vzA-S5-Wd4" secondAttribute="bottomMargin" id="wkv-9a-t49"/>
+                                    <constraint firstAttribute="centerX" secondItem="sdN-LM-g8n" secondAttribute="centerX" id="zyg-gp-JPE"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="nameLabel" destination="CtI-G2-fa5" id="zRI-v0-oFC"/>
+                                    <outlet property="schemeLabel" destination="sdN-LM-g8n" id="sfy-xG-H3d"/>
+                                    <outlet property="villainImageView" destination="6JY-X3-zcp" id="fYT-ut-S7m"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Tpk-fk-xT8" id="JV0-w3-wxu"/>
+                            <outlet property="delegate" destination="Tpk-fk-xT8" id="HNg-Tm-wfP"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Villains" id="Sjl-wu-pCF"/>
+                    <connections>
+                        <outlet property="addButton" destination="Kpl-WL-AXU" id="EV1-f0-3Fb"/>
+                        <outlet property="cancelButton" destination="s9i-2y-t6a" id="Jb0-XI-vhh"/>
+                        <outlet property="deleteButton" destination="bl4-iy-Qdc" id="fad-Fx-tho"/>
+                        <outlet property="editButton" destination="hpD-ah-tRs" id="hdd-nu-jk3"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SxV-6a-ipR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem title="Add" id="Kpl-WL-AXU">
+                    <connections>
+                        <action selector="addAction:" destination="Tpk-fk-xT8" id="2LD-2t-Udf"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="Delete" id="bl4-iy-Qdc">
+                    <connections>
+                        <action selector="deleteAction:" destination="Tpk-fk-xT8" id="nOa-nX-VEf"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="Edit" id="hpD-ah-tRs">
+                    <connections>
+                        <action selector="editAction:" destination="Tpk-fk-xT8" id="Tyg-JH-p6w"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem title="Cancel" id="s9i-2y-t6a">
+                    <connections>
+                        <action selector="cancelAction:" destination="Tpk-fk-xT8" id="ZYO-up-87K"/>
+                    </connections>
+                </barButtonItem>
+            </objects>
+            <point key="canvasLocation" x="384" y="-109"/>
+        </scene>
+        <!--Villains-->
         <scene sceneID="xMo-67-Yjn">
             <objects>
-                <tableViewController id="HkB-eO-nVE" customClass="ViewController" customModule="BondVillains" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SGx-BO-dfJ">
+                <tableViewController title="Villains" id="HkB-eO-nVE" customClass="ViewController" customModule="BondVillains" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="SGx-BO-dfJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,7 +253,7 @@
                             <outlet property="delegate" destination="HkB-eO-nVE" id="IKC-D4-7OG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kqd-me-UMl"/>
+                    <navigationItem key="navigationItem" title="Villains" id="kqd-me-UMl"/>
                     <connections>
                         <outlet property="addButton" destination="6PG-sD-bNR" id="vEO-Wf-jOf"/>
                         <outlet property="cancelButton" destination="HlR-4d-t1R" id="dXX-gf-V37"/>
